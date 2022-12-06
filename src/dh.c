@@ -30,11 +30,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-// Prevent OpenSSL 3 from defining a macro which name-clashes with the 'hex_to_string'
-// constant we define in include/dh.h
-// https://github.com/openssl/openssl/blob/openssl-3.0.7/include/openssl/x509v3.h.in#L697
-#define OPENSSL_NO_DEPRECATED_1_1_0
-
 #include <openssl/rand.h>
 #include <openssl/err.h>
 #include <openssl/bn.h>
