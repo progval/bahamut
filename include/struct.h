@@ -50,7 +50,7 @@
 #endif
 
 #ifdef USE_SSL
-#define OPENSSL_API_LEVEL 10100 /* Asks openssl not to #define hex_to_string */
+#define OPENSSL_API_COMPAT 0x10101000L /* Asks openssl not to #define hex_to_string */
 #include <openssl/rsa.h>       /* OpenSSL stuff */
 #include <openssl/crypto.h>
 #include <openssl/x509.h>
