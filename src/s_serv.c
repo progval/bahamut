@@ -449,7 +449,7 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
                        RPL_INFO, parv[0], SSLeay_version(SSLEAY_VERSION));
 #else /* OPENSSL_VERSION_NUMBER */
             sendto_one(sptr, ":%s %d %s :OpenSSL Version: %s", me.name,
-                       RPL_INFO, parv[0], SSLeay_version(OPENSSL_VERSION));
+                       RPL_INFO, parv[0], OpenSSL_version(OPENSSL_VERSION));
 #endif /* OPENSSL_VERSION_NUMBER */
 #endif /* USE_SSL */
             sendto_one(sptr, ":%s %d %s :zlib version: %s", me.name,
