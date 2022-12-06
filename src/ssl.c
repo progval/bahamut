@@ -55,8 +55,14 @@ int ssl_init()
     }
     fclose(file);
 
+#if OPENSSL_VERSION_NUMBER < 0x10101000L
     SSL_load_error_strings();
     SSLeay_add_ssl_algorithms();
+#else
+    OPENSSL_init_ssl(OPENSSL_INIT_LOAD_SSL_STRINGS \
+                     | OPENSSL_INIT_LOAD_CRYPTO_STRINGS, NULL);
+    SSL_library_init();
+#endif
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
     ircdssl_ctx = SSL_CTX_new(SSLv23_server_method());
 #else
