@@ -444,9 +444,14 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
             sendto_one(sptr, ":%s %d %s :Socket Engine Type: %s", me.name,
                        RPL_INFO, parv[0], engine_name());
 #ifdef USE_SSL
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
             sendto_one(sptr, ":%s %d %s :OpenSSL Version: %s", me.name,
                        RPL_INFO, parv[0], SSLeay_version(SSLEAY_VERSION));
-#endif
+#else /* OPENSSL_VERSION_NUMBER */
+            sendto_one(sptr, ":%s %d %s :OpenSSL Version: %s", me.name,
+                       RPL_INFO, parv[0], SSLeay_version(OPENSSL_VERSION));
+#endif /* OPENSSL_VERSION_NUMBER */
+#endif /* USE_SSL */
             sendto_one(sptr, ":%s %d %s :zlib version: %s", me.name,
                        RPL_INFO, parv[0], ZLIB_VERSION);
             sendto_one(sptr, ":%s %d %s :FD_SETSIZE=%d WRITEV_IOV=%d "
